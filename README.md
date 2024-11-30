@@ -58,10 +58,10 @@ To set up and run Charty Chats locally, follow these steps:
    ```bash
    pip install -r requirements.txt
    ```
-3.**Change Directory: Navigate to the project directory**:
-  ```bash
-  cd ChartyChats
-  ```
+3. **Change Directory: Navigate to the project directory**:
+   ```bash
+   cd ChartyChats
+   ```
 4. **Configure the API Key**:
    *Add your Gemini API key in ChartyChats/chat/views.py.*
 5. **Run the Development Server**:
