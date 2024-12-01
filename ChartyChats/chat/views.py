@@ -9,7 +9,7 @@ from .grapher import graphGenerator
 
 def chat(request):
     #GEMINI API 
-    geni.configure(api_key="AIzaSyDDSxJW6cQ0VJIKNl6fHM94xktkXG0yTL0")
+    geni.configure(api_key="GOOGLE_API_KEY")
     generation_config = {
         "temperature": 0.9,
         "top_p": 0.95,
