@@ -1,0 +1,142 @@
+body {
+    background: radial-gradient(lightyellow, rgb(255, 196, 134));
+    position: relative; 
+    overflow: hidden; 
+}
+.logo_chats{
+            justify-content: center;
+            height: 130px;
+        }
+        .navbar{      
+            justify-content: center;
+        }
+        .nav-link{
+            justify-content: center;
+            font-size: 30px;
+            padding: 10px;
+            transition: 1ms;
+            color: rgb(112, 173, 71);
+            border-radius: 5px;
+
+        }
+        .nav-link:hover{
+            justify-content: center;
+            font-size: 30px;
+            padding: 10px;
+            background-color: rgb(112, 173, 71);
+            color: rgb(255, 255, 255);
+            border-radius: 5px;
+        }
+        .welcome{
+            font-size: 50px;
+            text-align: center;
+            text-shadow: 4px 3px 2px rgb(112, 173, 71);
+        }
+        .welcome-intext{
+            font-size: 25px;
+            text-align: justify;
+            text-shadow: 3px 2px 2px rgb(112, 173, 71)
+        }
+        
+        .upload-taunt {
+            font-size: 25px;
+            text-align: center;
+            font-weight: bold;
+            animation: colorChange 5s infinite;
+            text-shadow: 3px 3px 2px rgb(112, 173, 71)
+        }
+
+/* Square container */
+.square-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Prevent the squares from interfering with other content */
+    z-index: -1; /* Ensure the squares are behind all other content */
+    filter: blur(10px);
+}
+
+/* Individual square styles */
+.square {
+    width: 100px; /* Set a fixed size for the square */
+    height: 100px;
+    position: absolute;
+    background-color: green; /* Default square color */
+    animation: spin 10s linear infinite;
+    border-radius: 90px;
+    overflow: hidden; /* Ensure the lines don't overflow the border */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.square::before, .square::after {
+    content: '';
+    position: absolute;
+    width: 140%; /* Make the lines longer than the square */
+    height: 2px; /* Line thickness */
+    background-color:rgb(55, 255, 0); /* Line color */
+    top: 50%; /* Center the line vertically */
+    left: 50%; /* Center the line horizontally */
+    transform-origin: center center;
+}
+
+.square::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.square::after {
+    transform: translate(-50%, -50%) rotate(-45deg); 
+}
+
+/* First square */
+.square:nth-child(1) {
+    top: -10%;
+    left: 0%;
+    width: 305px; /* Larger square */
+    height: 305px;
+    background-color: green; /* Set color for this square */
+}
+
+/* Second square */
+.square:nth-child(2) {
+    top: 0%;
+    left: 70%;
+    width: 305px; /* Larger square */
+    height: 305px;
+    background-color: limegreen;
+    animation-duration: 8s;
+    animation-direction: reverse;
+}
+
+/* Third square */
+.square:nth-child(3) {
+    top: 70%;
+    left: 80%;
+    width: 305px;
+    height: 305px;
+    background-color: darkgreen;
+    animation-duration: 10s;
+}
+
+.square:nth-child(4) {
+    top: 80%;
+    left: 5%;
+    width: 305px; /* Larger square */
+    height: 305px;
+    background-color: limegreen;
+    animation-duration: 8s;
+    animation-direction: reverse;
+}
+
+/* Keyframes for rotating squares */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
