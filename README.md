@@ -73,3 +73,7 @@ To set up and run Charty Chats locally, follow these steps:
 3. Use the input field to describe the type of graph or analysis you need (e.g., "Show a bar chart of weekly sales").
 4. View dynamically generated charts and summaries based on your input.
 
+## Video Demo
+
+https://www.youtube.com/watch?v=Vu2AKpud5Os  <- Subscribe to my channel  😄👍
+
