@@ -1,7 +1,8 @@
 import plotly.graph_objects as go
+from plotly.offline import plot
 
 def graphGenerator(data):
-    # Initialize the figure
+    #INITIALIZE THE FIGURE
     fig = go.Figure()
     
     #FINDING THE GRAPH TYPE FROM THE JSON PASSED
@@ -73,4 +74,5 @@ def graphGenerator(data):
     fig.update_layout(layout)
 
     #PLOTTING
-    fig.show()
+    graph_html = plot(fig, output_type='div', include_plotlyjs='cdn')
+    return graph_html
