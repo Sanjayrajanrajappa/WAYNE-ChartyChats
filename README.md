@@ -75,5 +75,5 @@ To set up and run Charty Chats locally, follow these steps:
 
 ## Video Demo
 
-https://www.youtube.com/watch?v=Vu2AKpud5Os  <- Subscribe to my channel  😄👍
+https://youtu.be/H59gFs3ldXU  <- Subscribe to my channel  😄👍
 
