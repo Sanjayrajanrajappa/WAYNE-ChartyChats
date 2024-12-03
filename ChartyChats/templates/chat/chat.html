@@ -8,297 +8,316 @@
     <title>ChartyChat</title>
     <link rel="stylesheet" href="{% static 'chat/style.css' %}">
     <style>
-                body {
-    background: radial-gradient(lightyellow, rgb(255, 196, 134));
-    position: relative; 
-    overflow: hidden; 
-}
+        body {
+            background: radial-gradient(lightyellow, rgb(255, 196, 134));
+            position: relative; 
+            overflow: hidden; 
+        }
+
         .container {
-    border: 2px solid black;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    height: 87vh;
-    width: auto;
-}
-.msg-box {
-    height: 80vh;
-    border-radius: 10px;
-    width: 167vh;
-    margin-top: 5px;
-    margin-bottom: 7px;
-    overflow-y: auto;
-    background-color: white;
-}
-input[type="file"] {
-    display: none;
-}
-.chat-box {
-    border: 2px solid black;
-    border-radius: 30px;
-    width: 167vh;
-    height: fit-content;
-    margin-bottom: 5px;
-    padding: 2px;
-    align-self: flex-start;
-}
-.input-cont input {
-    width: 100vh;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 30px;
-    font-size: 14px;
-}
-.submit-btn, .file-btn, .file-submit-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background-color: #f0f0f0;
-    border-radius: 50%;
-    border: 1px solid #ccc;
-}
-.submit-btn svg, .file-btn svg, .file-submit-btn svg {
-    width: 50px;
-    height: 50px;
-    color: #000000;
-}
-.message {
-    margin: 10px;
-    padding: 10px;
-    border-radius: 10px;
-    max-width: 70%;
-}
-#msg-box::-webkit-scrollbar {
-    width: 8px; /* Set the width of the scrollbar */
-    
-}
+            border: 2px solid black;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            height: 87vh;
+            width: auto;
+        }
 
-/* Style the scrollbar thumb (the draggable part) */
-#msg-box::-webkit-scrollbar-thumb {
-    background-color: #888; /* Gray color */
-    border-radius: 10px; /* Rounded corners */
-}
+        .msg-box {
+            height: 80vh;
+            border-radius: 10px;
+            width: 167vh;
+            margin-top: 5px;
+            margin-bottom: 7px;
+            overflow-y: auto;
+            background-color: white;
+        }
 
-/* Style the scrollbar thumb when hovered */
-#msg-box::-webkit-scrollbar-thumb:hover {
-    background-color: #555; /* Darker color when hovered */
-}
+        input[type="file"] {
+            display: none;
+        }
 
-/* Style the scrollbar track (background) */
-#msg-box::-webkit-scrollbar-track {
-    background-color: #f1f1f1; /* Light background for the track */
-    border-radius: 10px; /* Rounded corners for the track */
-}
+        .chat-box {
+            border: 2px solid black;
+            border-radius: 30px;
+            width: 167vh;
+            height: fit-content;
+            margin-bottom: 5px;
+            padding: 2px;
+            align-self: flex-start;
+        }
 
-/* Optional: Style the corner of the scrollbar (where both scrollbars meet) */
-#msg-box::-webkit-scrollbar-corner {
-    background-color: transparent; /* No color for the corner */
-}
-/* Container for user message (image on the right, message before it) */
-.user-message-container {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end; /* Align to the right */
-}
+        .input-cont input {
+            width: 100vh;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 30px;
+            font-size: 14px;
+        }
 
-.user-message-container .message {
-    background-color: #e0e0e0;
-    height: auto;
-    border-radius: 10px;
-    max-width: 70%;
-    word-wrap: break-word;
-    order: 1;
-    font-size: 20px;
-}
+        .submit-btn, .file-btn, .file-submit-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #f0f0f0;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+        }
 
-.user-message-container img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-left: 10px; /* Space between message and image */
-    order: 2; /* Image comes after the message */
-}
+        .submit-btn svg, .file-btn svg, .file-submit-btn svg {
+            width: 50px;
+            height: 50px;
+            color: #000000;
+        }
 
-/* Container for bot message (image on the left, message after it) */
-.bot-message-container {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; /* Align to the left */
-}
+        .message {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 70%;
+        }
 
-.bot-message-container .message {
-    background-color: #4CAF50;
-    border-radius: 10px;
-    color: white;
-    max-width: 70%;
-    height: auto;
-    word-wrap: break-word;
-    order: 2;
-    font-size: 20px;
-}
+        #msg-box::-webkit-scrollbar {
+            width: 8px; 
+        }
 
-.bot-message-container img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px; /* Space between image and message */
-    order: 1; /* Image comes before the message */
-}
-.header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Space between the logo and button */
-    padding: 10px; /* Optional padding for spacing */
-}
+        #msg-box::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 10px;
+        }
 
-.logo_chats {
-    height: 70px; /* Adjust as needed */
-    display: inline-block;
-}
+        #msg-box::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
 
-.reset-btn {
-    background-color: #f44336;
-    color: white;
-    border: 2px solid black;
-    border-radius: 30px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 14px;
-}
+        #msg-box::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+            border-radius: 10px;
+        }
 
-.reset-btn:hover {
-    background-color: #ffffff; /* Darker red on hover */
-    border: 2px solid black;
-    color: #f44336;
+        #msg-box::-webkit-scrollbar-corner {
+            background-color: transparent;
+        }
 
-}
-.file-btn , .file-submit-btn, .submit-btn{
-    cursor: pointer;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #4CAF50; /* Blue color, change as needed */
-    color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    transition: background-color 0.3s, transform 0.1s;
-}
+        .user-message-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
 
-.file-btn svg , .file-submit-btn svg, .submit-btn svg{
-    width: 20px;
-    height: 20px;
-}
+        .user-message-container .message {
+            background-color: #e0e0e0;
+            height: auto;
+            border-radius: 10px;
+            max-width: 70%;
+            word-wrap: break-word;
+            order: 1;
+            font-size: 20px;
+        }
 
-/* Hover effect */
-.file-btn:hover , .file-submit-btn:hover, .submit-btn:hover{
-    background-color: #a2ffa5; /* Darker blue on hover */
-    
-}
+        .user-message-container img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-left: 10px;
+            order: 2;
+        }
 
-/* Square container */
-.square-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* Prevent the squares from interfering with other content */
-    z-index: -1; /* Ensure the squares are behind all other content */
-    filter: blur(20px);
-}
+        .bot-message-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
 
-/* Individual square styles */
-.square {
-    width: 100px; /* Set a fixed size for the square */
-    height: 100px;
-    position: absolute;
-    background-color: green; /* Default square color */
-    animation: spin 10s linear infinite;
-    border-top-left-radius: 160px;
-    border-bottom-right-radius: 160px;
-    
-    overflow: hidden; /* Ensure the lines don't overflow the border */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        .bot-message-container .message {
+            background-color: #4CAF50;
+            border-radius: 10px;
+            color: white;
+            max-width: 70%;
+            height: auto;
+            word-wrap: break-word;
+            order: 2;
+            font-size: 20px;
+        }
 
-.square::before, .square::after {
-    content: '';
-    position: absolute;
-    width: 140%; /* Make the lines longer than the square */
-    height: 2px; /* Line thickness */
-    background-color:rgb(255, 255, 255); /* Line color */
-    top: 50%; /* Center the line vertically */
-    left: 50%; /* Center the line horizontally */
-    transform-origin: center center;
-}
+        .bot-message-container img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+            order: 1;
+        }
 
-.square::before {
-    transform: translate(-50%, -50%) rotate(45deg);
-}
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+        }
 
-.square::after {
-    transform: translate(-50%, -50%) rotate(-45deg); 
-}
+        .logo_chats {
+            height: 70px;
+            display: inline-block;
+        }
 
-/* First square */
-.square:nth-child(1) {
-    top: -10%;
-    left: 0%;
-    width: 305px; /* Larger square */
-    height: 305px;
-    background-color: green; /* Set color for this square */
-    animation-duration: 8s;
-}
+        .reset-btn {
+            background-color: #f44336;
+            color: white;
+            border: 2px solid black;
+            border-radius: 30px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
 
-/* Second square */
-.square:nth-child(2) {
-    top: 0%;
-    left: 75%;
-    width: 305px; /* Larger square */
-    height: 305px;
-    background-color: green;
-    animation-duration: 8s;
-    animation-direction: reverse;
-}
+        .reset-btn:hover {
+            background-color: #ffffff;
+            border: 2px solid black;
+            color: #f44336;
+        }
 
-/* Third square */
-.square:nth-child(3) {
-    top: 70%;
-    left: 80%;
-    width: 305px;
-    height: 305px;
-    background-color: green;
-    animation-duration: 8s;
-}
+        .file-btn, .file-submit-btn, .submit-btn {
+            cursor: pointer;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transition: background-color 0.3s, transform 0.1s;
+        }
 
-.square:nth-child(4) {
-    top: 75%;
-    left: 5%;
-    width: 305px; /* Larger square */
-    height: 305px;
-    background-color: green;
-    animation-duration: 8s;
-    animation-direction: reverse;
-}
+        .file-btn svg, .file-submit-btn svg, .submit-btn svg {
+            width: 20px;
+            height: 20px;
+        }
 
-/* Keyframes for rotating squares */
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
+        .file-btn:hover, .file-submit-btn:hover, .submit-btn:hover {
+            background-color: #a2ffa5;
+        }
+
+        .square-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            filter: blur(20px);
+        }
+
+        .square {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background-color: green;
+            animation: spin 10s linear infinite;
+            border-top-left-radius: 160px;
+            border-bottom-right-radius: 160px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .square::before, .square::after {
+            content: '';
+            position: absolute;
+            width: 140%;
+            height: 2px;
+            background-color: rgb(255, 255, 255);
+            top: 50%;
+            left: 50%;
+            transform-origin: center center;
+        }
+
+        .square::before {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .square::after {
+            transform: translate(-50%, -50%) rotate(-45deg); 
+        }
+
+        .square:nth-child(1) {
+            top: -10%;
+            left: 0%;
+            width: 305px;
+            height: 305px;
+            background-color: green;
+            animation-duration: 8s;
+        }
+
+        .square:nth-child(2) {
+            top: 0%;
+            left: 75%;
+            width: 305px;
+            height: 305px;
+            background-color: green;
+            animation-duration: 8s;
+            animation-direction: reverse;
+        }
+
+        .square:nth-child(3) {
+            top: 70%;
+            left: 80%;
+            width: 305px;
+            height: 305px;
+            background-color: green;
+            animation-duration: 8s;
+        }
+
+        .square:nth-child(4) {
+            top: 75%;
+            left: 5%;
+            width: 305px;
+            height: 305px;
+            background-color: green;
+            animation-duration: 8s;
+            animation-direction: reverse;
+        }
+
+        .graph-container {
+            max-width: 100%;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 3px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .graph-container svg, 
+        .graph-container canvas {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .graph-container {
+                padding: 5px;
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 <div class="header-container" style="display: flex; align-items: center; justify-content: space-between;">
@@ -333,6 +352,11 @@ input[type="file"] {
                         <img src="{% static 'home/Charty.png' %}" alt="Bot Profile Image">
                         <div class="message bot-message">
                             <span>{{ message.bot }}</span>
+                            {% if message.graph_html %}
+                                <div class="graph-container" style="border-radius: 5px;">
+                                    {{ message.graph_html|safe }}
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -379,24 +403,15 @@ input[type="file"] {
 <script>
     const chatBox = document.getElementById('msg-box');
     chatBox.scrollTop = chatBox.scrollHeight;
-
     function showUploadAlert() {
         alert('The file has been uploaded to the server!');
     }
-
     function resetChat() {
-        // Clear the content of the message box
         document.getElementById('msg-box').innerHTML = '';
-
-        // Clear the input fields
         document.querySelectorAll('input[type="text"], textarea').forEach(function(input) {
             input.value = '';
         });
-
-        // Clear the bot's response section
         document.querySelector('.response').innerHTML = '';
-
-        // Send a POST request to reset session data on the server
         fetch("{% url 'chat' %}", {
             method: 'POST',
             body: new FormData(document.querySelector('form')),
