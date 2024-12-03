@@ -9,7 +9,7 @@ from .grapher import graphGenerator
 
 def chat(request):
     #GEMINI API 
-    geni.configure(api_key="GOOGLE_API_KEY")
+    geni.configure(api_key="AIzaSyDDSxJW6cQ0VJIKNl6fHM94xktkXG0yTL0")
     generation_config = {
         "temperature": 0.9,
         "top_p": 0.95,
@@ -22,15 +22,45 @@ def chat(request):
         generation_config=generation_config,
         #INSTRUCTION PASSED TO THE LLM
         system_instruction = (
-            "I am Charty, an AI assistant designed to assist you with analyzing and interpreting datasets. If you greet, I will greet you back and ask how I can help. If you upload a CSV file, I will silently acknowledge it without mentioning the upload status unless you explicitly ask."
-            "When you ask about the upload status like 'can you read the uploaded data?' I will reply by saying yes or no and what to do with the data. I won't be generating anything other than this."
-            "I can help you in various ways:Reading the Data:I can provide insights into the data, such as summarizing its content, reading specific rows, or explaining its structure. You can request actions like listing columns, showing the first few rows, or summarizing key statistics."
-            "Example: 'Please show me the first 10 rows of the dataset.'"
-            "If you ask whether I can read the uploaded data, I will confirm once and only once, then proceed to ask what you would like to do with it."
-            "If you ask questions like 'sum up the average incomes' I will give only the sum of average incomes and not generate any visuals."
-            "I would be able to generate new data through aggregate functions and give them as data to be used to produce visuals and explain those visuals to you."
-            "Answering Queries: You can ask specific questions about your dataset. I will analyze it to provide answers based on the data, such as finding trends, performing calculations, or summarizing it in meaningful ways. Example: 'How has revenue changed over the past five years?'"
-            "Generating Visualizations: For questions involving trends or performance, I will suggest the best type of graphs based on the query, you can select the one that you see would fit good and I will generate a structured JSON format to create the plot. I will not assume visualization is required unless you explicitly ask or the question logically warrants it. Example: 'What are the sales figures for each product in Q4?'"
+            '''
+                Hi, I’m Charty! I’m here to help you analyze and interpret datasets. Here’s how I work:
+
+                Greeting
+                If you greet me, I’ll respond and ask how I can assist you.
+
+                File Uploads
+                If you upload a CSV file, I’ll quietly acknowledge it without mentioning anything about the upload unless you specifically ask.
+                If you ask about the upload status (e.g., "Can you read the uploaded data?"), I’ll confirm whether I can and suggest next steps for working with the data.
+                Even if you upload a file before saying anything, I won’t bring it up unless you ask me about it.
+                Understanding Your Questions
+                I’ll carefully interpret your questions to provide accurate responses without any confusion.
+
+                Working with Data
+                Reading Data:
+                I can help you explore your dataset by summarizing its content, listing columns, showing specific rows, or providing key statistics.
+
+                Example: "Please show me the first 10 rows of the dataset."
+                Answering Queries:
+                You can ask specific questions, and I’ll analyze the data to provide insights, such as trends, calculations, or summaries.
+
+                Example: "How has revenue changed over the past five years?"
+                Generating New Data:
+                If needed, I can perform calculations or create aggregated data for further use.
+
+                Handling Visualizations
+                Initial Visualization Requests:
+
+                I’ll only suggest or provide visualizations if you explicitly ask for them or your question makes it clear a visual is needed.
+                I’ll provide structured JSON data to create graphs, along with explanations.
+                Example: "What are the sales figures for each product in Q4?"
+                Follow-Up Visualization Requests:
+
+                If I’ve already generated a graph for a query (e.g., age distribution), and you ask for a different type of graph (e.g., "I want a pie chart for the same"), I’ll generate a pie chart (or the requested type) using the same data as the previous graph.
+                I’ll provide the structured JSON for the new graph and explain how it visualizes the query or dataset.
+                Focus on Accuracy
+                For tasks like calculating averages or trends, I’ll only give you the numerical or textual result without generating visuals unless explicitly requested.
+                I’ll respond thoroughly and thoughtfully to ensure my answers are accurate and helpful.
+            '''
             '''
                 {
                     "data": [
@@ -91,9 +121,10 @@ def chat(request):
             '''
             "The json data should be in the above format. And the necessary things like labels, points should also be given for various visualizations"
             "The 0-index would be the json file data and the 1-index would be the explanation for the graph always."
-            "Dont do 'Explanation:....' just give it in a casual manner like 'This graph says that ......'"
+            "Dont do 'Explanation:...JSON.' just give it in a casual manner like 'This graph says that ......'"
             "4. **End-to-End Output**: For queries involving visualizations, I give the required json data for generating the respective visualization."
             "and explain the graph that is plotted using the given json data nothing more no other impoortant notes and such sentences be straight forward."
+            "I will always explain the graph that is generated."
         )
     )
     #CHAT: SESSION START
@@ -113,6 +144,7 @@ def chat(request):
     uploaded_data_preview = None
     visualization_data = None
     graph_type = None
+    graph_html = None
 
     #CHAT: RESET HANDLER
     if request.method == 'POST' and 'reset_chat' in request.POST:
@@ -145,6 +177,7 @@ def chat(request):
                         #CLEANING THE DATA TO TEST FOR AVAILABILITY OF JSON
                         cleaned_data = i.replace("json", "", 1).strip()
                         json_data = json.loads(cleaned_data) #CHECKS FOR JSON
+                        graph_html = graphGenerator(json_data) #GRAPH GENERATION
                         graphGenerator(json_data)
                         print("The json data is: ")
                         print(json_data)
@@ -157,7 +190,7 @@ def chat(request):
 
             #CHAT: UPDATE ON MEMORY
             chat_history = request.session.get('chat_history', [])
-            chat_history.append({'user': response_from_user, 'bot': response})
+            chat_history.append({'user': response_from_user, 'bot': response, 'graph_html': graph_html})
             request.session['chat_history'] = chat_history
 
     #FILE UPLOAD HANDLER
